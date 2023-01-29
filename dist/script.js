@@ -2,6 +2,27 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/lib/components/dropdown.js":
+/*!*******************************************!*\
+  !*** ./src/js/lib/components/dropdown.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
+  for (let i = 0; i < this.length; i++) {
+    const id = (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).getAttr('id');
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(() => {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`[data-toggle-id="${id}"]`).fadeToggle(500);
+    });
+  }
+};
+(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdown();
+
+/***/ }),
+
 /***/ "./src/js/lib/core.js":
 /*!****************************!*\
   !*** ./src/js/lib/core.js ***!
@@ -52,7 +73,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handlers */ "./src/js/lib/modules/handlers.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
 /* harmony import */ var _modules_attribute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/attribute */ "./src/js/lib/modules/attribute.js");
-/* harmony import */ var _modules_affects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules//affects */ "./src/js/lib/modules/affects.js");
+/* harmony import */ var _modules_affects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/affects */ "./src/js/lib/modules/affects.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/lib/components/dropdown.js");
+
 
 
 
@@ -476,6 +499,16 @@ __webpack_require__.r(__webpack_exports__);
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').eq(2).on('click', () => {
   (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.w-500').fadeToggle(800);
 });
+(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.wrap').html(`<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle" id='dropdownMenuButton'>Dropdown button</button>
+		<div class="dropdown-menu" data-toggle-id='dropdownMenuButton'>
+			<a href="#" class="dropdown-item">Action </a>
+			<a href="#" class="dropdown-item">Action #2</a>
+			<a href="#" class="dropdown-item">Action #3</a>
+		</div>
+	</div>
+	`);
+(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdown();
 })();
 
 /******/ })()
