@@ -8,7 +8,6 @@ $.prototype.modal = function(created) {
 			$(target).fadeIn(500);
 			document.body.style.overflow = 'hidden';
 		})
-		console.log(`${target} [data-close]`)
 		const closeEmelents = document.querySelectorAll(`${target} [data-close]`);
 		closeEmelents.forEach(elem => {
 			$(elem).click(() => {
