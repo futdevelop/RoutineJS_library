@@ -41,12 +41,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function () {
+  let autoPlay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   for (let i = 0; i < this.length; i++) {
     const width = window.getComputedStyle(this[i].querySelector('.carousel-inner')).width;
     const slides = this[i].querySelectorAll('.carousel-item');
     const slidesField = this[i].querySelector('.carousel-slides');
     const dots = this[i].querySelectorAll('.carousel-indicators li');
     const sliderId = this[i].getAttribute('id');
+    let time;
     const bindDots = () => {
       dots.forEach(dot => dot.classList.remove('active'));
       dots[slideIndex].classList.add('active');
@@ -55,12 +57,23 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function () {
     slides.forEach(slide => slide.style.width = width);
     let offset = 0,
       slideIndex = 0;
-    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="next"]')).click(e => {
-      e.preventDefault();
+    const playAutoPlay = () => {
+      if (autoPlay) {
+        time = setInterval(() => nextBtn(), 5000);
+      }
+    };
+    const stopAutoPlay = () => clearInterval(time);
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.carousel-inner').on('mouseenter', () => stopAutoPlay());
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.carousel-inner').on('mouseleave', () => playAutoPlay());
+    const nextBtn = () => {
       offset == +width.replace(/\D/g, '') * (slides.length - 1) ? offset = 0 : offset += +width.replace(/\D/g, '');
       slidesField.style.transform = `translateX(-${offset}px)`;
       slideIndex == slides.length - 1 ? slideIndex = 0 : slideIndex++;
       bindDots();
+    };
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="next"]')).click(e => {
+      e.preventDefault();
+      nextBtn();
     });
     (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="prev"]')).click(e => {
       e.preventDefault();
